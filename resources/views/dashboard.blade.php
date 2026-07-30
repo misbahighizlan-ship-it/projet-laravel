@@ -2,43 +2,55 @@
 
 @section('content')
 
-<div class="row">
+<div class="row g-4">
 
-    <div class="col-md-4">
-
-        <div class="card">
-
-            <div class="card-body text-center">
-
-                <h5>Total Products</h5>
-
-                <h1 class="display-4 text-primary">
-                    {{ $totalProducts }}
-                </h1>
-
-            </div>
-
+    <div class="col-md-3">
+        <div class="card shadow border-0 rounded-4 text-center p-4">
+            <h6>Total Produits</h6>
+            <h2 class="text-primary">{{ $totalProducts }}</h2>
         </div>
-
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-3">
+        <div class="card shadow border-0 rounded-4 text-center p-4">
+            <h6>Stock Total</h6>
+            <h2 class="text-success">{{ $totalStock }}</h2>
+        </div>
+    </div>
 
-        <div class="card">
+    <div class="col-md-3">
+        <div class="card shadow border-0 rounded-4 text-center p-4">
+            <h6>Valeur Stock</h6>
+            <h2 class="text-warning">
+                {{ number_format($totalValue, 2) }} DH
+            </h2>
+        </div>
+    </div>
 
-            <div class="card-body">
+    <div class="col-md-3">
+        <div class="card shadow border-0 rounded-4 text-center p-4">
+            <h6>Stock Faible</h6>
+            <h2 class="text-danger">{{ $lowStock }}</h2>
+        </div>
+    </div>
 
-                <h3>Bienvenue 👋</h3>
+</div>
 
-                <p class="text-muted">
-                    Gérez vos produits facilement avec votre Dashboard Laravel.
-                </p>
+<div class="mt-4">
 
-                <a href="{{ route('products.index') }}" class="btn btn-primary">
-                    Gérer les Produits
-                </a>
+    <div class="card shadow border-0 rounded-4">
 
-            </div>
+        <div class="card-body">
+
+            <h3>Bienvenue 👋</h3>
+
+            <p class="text-muted">
+                Gérez vos produits facilement avec votre Dashboard Laravel.
+            </p>
+
+            <a href="{{ route('products.index') }}" class="btn btn-primary">
+                Gérer les Produits
+            </a>
 
         </div>
 

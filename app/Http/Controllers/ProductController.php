@@ -4,16 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     // Dashboard
     public function dashboard()
-    {
-        $totalProducts = Product::count();
+{
+    $totalProducts = Product::count();
 
-        return view('dashboard', compact('totalProducts'));
-    }
+    $totalStock = Product::sum('quantity');
+
+    $totalValue = Product::sum(DB::raw('price * quantity'));
+
+    $lowStock = Product::where('quantity', '<=', 5)->count();
+
+    return view('dashboard', compact(
+        'totalProducts',
+        'totalStock',
+        'totalValue',
+        'lowStock'
+    ));
+}
 
     // Afficher tous les produits
     public function index()

@@ -86,6 +86,16 @@
         .table{
             margin:0;
         }
+        .topbar{
+    background:#fff;
+    padding:18px 25px;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
 
     </style>
 
@@ -107,6 +117,20 @@
         Produits
     </a>
 
+</div>
+
+<div class="topbar">
+    <div>
+        <h4 class="m-0 fw-bold">Dashboard</h4>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+        <span class="text-secondary">👋 Bonjour Admin</span>
+
+        <a href="#" class="btn btn-outline-danger btn-sm">
+            Logout
+        </a>
+    </div>
 </div>
 
 <div class="content">
