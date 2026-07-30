@@ -1,84 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+@section('content')
 
-<div class="container mt-5">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h2 class="mb-4">Liste des Produits</h2>
+    <h2 class="fw-bold">Gestion des Produits</h2>
 
-    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">
-        Ajouter un produit
+    <a href="{{ route('products.create') }}" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Ajouter Produit
     </a>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+</div>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+
+            <thead class="table-dark">
+
             <tr>
+
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Prix</th>
                 <th>Quantité</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-        @forelse($products as $product)
-
-            <tr>
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->quantity }}</td>
-
-                <td>
-
-                    <a href="{{ route('products.edit',$product->id) }}"
-                        class="btn btn-warning btn-sm">
-                        Modifier
-                    </a>
-
-                    <form action="{{ route('products.destroy',$product->id) }}"
-                          method="POST"
-                          style="display:inline;">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button class="btn btn-danger btn-sm">
-                            Supprimer
-                        </button>
-
-                    </form>
-
-                </td>
+                <th width="180">Actions</th>
 
             </tr>
 
-        @empty
+            </thead>
 
-            <tr>
-                <td colspan="6" class="text-center">
-                    Aucun produit trouvé
-                </td>
-            </tr>
+            <tbody>
 
-        @endforelse
+            @forelse($products as $product)
 
-        </tbody>
+                <tr>
 
-    </table>
+                    <td>{{ $product->id }}</td>
+
+                    <td>
+                        <strong>{{ $product->name }}</strong>
+                    </td>
+
+                    <td>{{ $product->description }}</td>
+
+                    <td>{{ $product->price }} DH</td>
+
+                    <td>
+
+                        <span class="badge bg-success">
+                            {{ $product->quantity }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <a href="{{ route('products.edit',$product) }}"
+                           class="btn btn-warning btn-sm">
+
+                            <i class="bi bi-pencil-square"></i>
+
+                        </a>
+
+                        <form action="{{ route('products.destroy',$product) }}"
+                              method="POST"
+                              class="d-inline">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                onclick="return confirm('Supprimer ce produit ?')"
+                                class="btn btn-danger btn-sm">
+
+                                <i class="bi bi-trash"></i>
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+            @empty
+
+                <tr>
+
+                    <td colspan="6" class="text-center py-5">
+
+                        Aucun produit disponible.
+
+                    </td>
+
+                </tr>
+
+            @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
-</body>
-</html>
+@endsection
