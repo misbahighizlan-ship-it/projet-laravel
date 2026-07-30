@@ -1,36 +1,131 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager Dashboard</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+        body{
+            background:#f4f7fe;
+            font-family:Arial, Helvetica, sans-serif;
+        }
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+        .sidebar{
+            width:250px;
+            height:100vh;
+            position:fixed;
+            left:0;
+            top:0;
+            background:#212529;
+            padding-top:20px;
+        }
+
+        .sidebar h3{
+            color:white;
+            text-align:center;
+            margin-bottom:40px;
+            font-weight:bold;
+        }
+
+        .sidebar a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:15px 25px;
+            transition:.3s;
+        }
+
+        .sidebar a:hover{
+            background:#0d6efd;
+            padding-left:35px;
+        }
+
+        .content{
+            margin-left:250px;
+            padding:30px;
+        }
+
+        .topbar{
+            background:white;
+            border-radius:15px;
+            padding:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,.08);
+            margin-bottom:25px;
+        }
+
+        .card{
+            border:none;
+            border-radius:18px;
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
+        }
+
+        .table{
+            background:white;
+        }
+
+        .btn{
+            border-radius:10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h3>Task Manager</h3>
+
+    <a href="{{ route('dashboard') }}">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+    </a>
+
+    <a href="{{ route('products.index') }}">
+        <i class="bi bi-box"></i>
+        Produits
+    </a>
+
+</div>
+
+<div class="content">
+
+    <div class="topbar d-flex justify-content-between align-items-center">
+
+        <h2>Admin Dashboard</h2>
+
+        <span class="text-secondary">
+            Laravel 13
+        </span>
+
+    </div>
+
+    @if(session('success'))
+
+        <div class="alert alert-success">
+
+            {{ session('success') }}
+
         </div>
-    </body>
+
+    @endif
+
+    @yield('content')
+
+</div>
+
+</body>
 </html>
