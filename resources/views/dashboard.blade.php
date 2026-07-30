@@ -1,85 +1,42 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Admin</title>
+@extends('layouts.app')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
 
-    <style>
-        body{
-            background:#f4f6f9;
-        }
+<div class="row">
 
-        .card-dashboard{
-            border:none;
-            border-radius:15px;
-            box-shadow:0 10px 25px rgba(0,0,0,.08);
-            transition:.3s;
-        }
+    <div class="col-md-4">
 
-        .card-dashboard:hover{
-            transform:translateY(-5px);
-        }
+        <div class="card">
 
-        .title{
-            font-weight:bold;
-        }
-    </style>
+            <div class="card-body text-center">
 
-</head>
-<body>
+                <h5>Total Products</h5>
 
-<div class="container mt-5">
-
-    <h1 class="mb-4 fw-bold">
-        Dashboard Admin
-    </h1>
-
-    <div class="row">
-
-        <div class="col-md-4">
-
-            <div class="card card-dashboard">
-
-                <div class="card-body">
-
-                    <h5 class="card-title">
-                        Nombre de Produits
-                    </h5>
-
-                    <h1 class="display-4 text-primary">
-                        {{ $totalProducts }}
-                    </h1>
-
-                </div>
+                <h1 class="display-4 text-primary">
+                    {{ $totalProducts }}
+                </h1>
 
             </div>
 
         </div>
 
-        <div class="col-md-8">
+    </div>
 
-            <div class="card card-dashboard">
+    <div class="col-md-8">
 
-                <div class="card-body">
+        <div class="card">
 
-                    <h4 class="title">
-                        Gestion des Produits
-                    </h4>
+            <div class="card-body">
 
-                    <p class="text-muted">
-                        Bienvenue dans votre tableau de bord administrateur.
-                    </p>
+                <h3>Bienvenue 👋</h3>
 
-                    <a href="{{ route('products.index') }}"
-                       class="btn btn-primary">
+                <p class="text-muted">
+                    Gérez vos produits facilement avec votre Dashboard Laravel.
+                </p>
 
-                        Gérer les Produits
-
-                    </a>
-
-                </div>
+                <a href="{{ route('products.index') }}" class="btn btn-primary">
+                    Gérer les Produits
+                </a>
 
             </div>
 
@@ -89,5 +46,4 @@
 
 </div>
 
-</body>
-</html>
+@endsection
