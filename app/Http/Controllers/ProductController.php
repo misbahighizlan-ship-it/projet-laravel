@@ -49,12 +49,24 @@ class ProductController extends Controller
 
     // Mettre à jour un produit
     public function update(Request $request, Product $product)
-    {
-        $product->update($request->all());
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'quantity' => 'required|integer',
+    ]);
 
-        return redirect()->route('products.index')
-            ->with('success', 'Produit modifié avec succès.');
-    }
+    $product->update([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'quantity' => $request->quantity,
+    ]);
+
+    return redirect()->route('products.index')
+        ->with('success', 'Produit modifié avec succès.');
+}
 
     // Supprimer un produit
     public function destroy(Product $product)
