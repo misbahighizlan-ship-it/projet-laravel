@@ -22,12 +22,24 @@ class ProductController extends Controller
 
     // Enregistrer un nouveau produit
     public function store(Request $request)
-    {
-        Product::create($request->all());
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'quantity' => 'required|integer',
+    ]);
 
-        return redirect()->route('products.index')
-            ->with('success', 'Produit ajouté avec succès.');
-    }
+    Product::create([
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'quantity' => $request->quantity,
+    ]);
+
+    return redirect()->route('products.index')
+        ->with('success', 'Produit ajouté avec succès.');
+}
 
     // Afficher le formulaire de modification
     public function edit(Product $product)
