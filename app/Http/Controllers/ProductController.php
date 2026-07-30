@@ -7,66 +7,75 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // Afficher tous les produits exist ......
+    // Dashboard
+    public function dashboard()
+    {
+        $totalProducts = Product::count();
+
+        return view('dashboard', compact('totalProducts'));
+    }
+
+    // Afficher tous les produits
     public function index()
     {
         $products = Product::all();
+
         return view('products.index', compact('products'));
     }
 
-    // Afficher le formulaire d'ajout
+    // Formulaire d'ajout
     public function create()
     {
         return view('products.create');
     }
 
-    // Enregistrer un nouveau produit
+    // Enregistrer un produit
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required|numeric',
-        'quantity' => 'required|integer',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|integer',
+        ]);
 
-    Product::create([
-        'name' => $request->name,
-        'description' => $request->description,
-        'price' => $request->price,
-        'quantity' => $request->quantity,
-    ]);
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+        ]);
 
-    return redirect()->route('products.index')
-        ->with('success', 'Produit ajouté avec succès.');
-}
+        return redirect()->route('products.index')
+            ->with('success', 'Produit ajouté avec succès.');
+    }
 
-    // Afficher le formulaire de modification
+    // Formulaire de modification
     public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
 
-    // Mettre à jour un produit
+    // Modifier un produit
     public function update(Request $request, Product $product)
-{
-    $request->validate([
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required|numeric',
-        'quantity' => 'required|integer',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|integer',
+        ]);
 
-    $product->update([
-        'name' => $request->name,
-        'description' => $request->description,
-        'price' => $request->price,
-        'quantity' => $request->quantity,
-    ]);
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+        ]);
 
-    return redirect()->route('products.index')
-        ->with('success', 'Produit modifié avec succès.');
-}
+        return redirect()->route('products.index')
+            ->with('success', 'Produit modifié avec succès.');
+    }
 
     // Supprimer un produit
     public function destroy(Product $product)
