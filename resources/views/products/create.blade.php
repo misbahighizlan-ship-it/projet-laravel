@@ -19,7 +19,7 @@
 
     <div class="card-body p-4">
 
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -82,7 +82,23 @@
                 </div>
 
             </div>
+<div class="mb-4">
 
+    <label class="form-label fw-semibold">
+        Image du Produit
+    </label>
+
+    <input
+        type="file"
+        name="image"
+        class="form-control"
+        accept="image/*">
+
+    <small class="text-muted">
+        Formats autorisés : JPG, PNG, JPEG
+    </small>
+
+</div>
             <div class="d-flex gap-2">
 
                 <button class="btn btn-primary">

@@ -34,7 +34,7 @@ class ProductController extends Controller
 
     $products = Product::where('name', 'like', '%' . $search . '%')
         ->orWhere('description', 'like', '%' . $search . '%')
-        ->get();
+        ->paginate(5); // a la place de get on fait la paginate pour tirer tous les product existe
 
     return view('products.index', compact('products', 'search'));
 }
@@ -47,24 +47,39 @@ class ProductController extends Controller
 
     // Enregistrer un produit
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-        ]);
+{
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'quantity' => 'required|integer',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-        ]);
+    $imageName = null;
 
-        return redirect()->route('products.index')
-            ->with('success', 'Produit ajouté avec succès.');
+    if ($request->hasFile('image')) {
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
     }
+
+    Product::create([
+
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'quantity' => $request->quantity,
+        'image' => $imageName,
+
+    ]);
+
+    return redirect()->route('products.index')
+        ->with('success','Produit ajouté avec succès.');
+
+}
 
     // Formulaire de modification
     public function edit(Product $product)
