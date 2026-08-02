@@ -193,27 +193,49 @@ document.addEventListener("DOMContentLoaded", function () {
             const form = this.closest('.delete-form');
 
             Swal.fire({
-                title: 'Supprimer ce produit ?',
-                text: 'Cette action est irréversible !',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: '<i class="bi bi-trash"></i> Oui, supprimer',
-                cancelButtonText: '<i class="bi bi-x-circle"></i> Annuler',
-                reverseButtons: true,
-                focusCancel: true,
-                allowOutsideClick: false,
-                backdrop: true
-            }).then((result) => {
+    title: '⚠️ Supprimer le produit ?',
+    html: `
+        <p style="font-size:16px">
+            Voulez-vous vraiment supprimer ce produit ?
+        </p>
+        <small style="color:#dc3545;font-weight:bold;">
+            Cette action est irréversible !
+        </small>
+    `,
+    icon: 'warning',
 
-                if (result.isConfirmed) {
+    width: 500,
 
-                    form.submit();
+    showCancelButton: true,
 
-                }
+    confirmButtonText: '🗑 Supprimer',
+    cancelButtonText: 'Annuler',
 
-            });
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#6c757d',
+
+    reverseButtons: true,
+    focusCancel: true,
+
+    background: '#ffffff',
+    color: '#212529',
+
+    showClass: {
+        popup: 'animate__animated animate__zoomIn'
+    },
+
+    hideClass: {
+        popup: 'animate__animated animate__zoomOut'
+    }
+}).then((result) => {
+
+    if (result.isConfirmed) {
+
+        form.submit();
+
+    }
+
+});
 
         });
 
