@@ -17,7 +17,9 @@
 
             <div class="card-body p-4">
 
-                <form action="{{ route('products.update', $product->id) }}" method="POST">
+                <form action="{{ route('products.update',$product->id) }}"
+                      method="POST"
+                      enctype="multipart/form-data">
 
                     @csrf
                     @method('PUT')
@@ -87,6 +89,34 @@
                             </div>
 
                         </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-semibold">
+                            Image actuelle
+                        </label>
+
+                        <br>
+
+                        @if($product->image)
+
+                            <img src="{{ asset('storage/'.$product->image) }}"
+                                 width="140"
+                                 class="rounded shadow mb-3">
+
+                        @else
+
+                            <p class="text-muted">Aucune image</p>
+
+                        @endif
+
+                        <input
+                            type="file"
+                            name="image"
+                            class="form-control"
+                            accept="image/*">
 
                     </div>
 
