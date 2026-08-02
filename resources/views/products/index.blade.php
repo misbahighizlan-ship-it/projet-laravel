@@ -184,47 +184,42 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-document.querySelectorAll('.delete-btn').forEach(button => {
+    document.querySelectorAll('.delete-btn').forEach(button => {
 
-    button.addEventListener('click', function () {
+        button.addEventListener('click', function () {
 
-        const form = this.closest('.delete-form');
+            const form = this.closest('.delete-form');
 
-        Swal.fire({
+            Swal.fire({
+                title: 'Supprimer ce produit ?',
+                text: 'Cette action est irréversible !',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="bi bi-trash"></i> Oui, supprimer',
+                cancelButtonText: '<i class="bi bi-x-circle"></i> Annuler',
+                reverseButtons: true,
+                focusCancel: true,
+                allowOutsideClick: false,
+                backdrop: true
+            }).then((result) => {
 
-            title: 'Supprimer ce produit ?',
+                if (result.isConfirmed) {
 
-            text: 'Cette action est irréversible !',
+                    form.submit();
 
-            icon: 'warning',
+                }
 
-            showCancelButton: true,
-
-            confirmButtonColor: '#dc3545',
-
-            cancelButtonColor: '#6c757d',
-
-            confirmButtonText: '🗑 Oui, supprimer',
-
-            cancelButtonText: 'Annuler',
-
-            reverseButtons: true
-
-        }).then((result) => {
-
-            if (result.isConfirmed) {
-
-                form.submit();
-
-            }
+            });
 
         });
 
     });
 
 });
-
 </script>
 
 @endsection

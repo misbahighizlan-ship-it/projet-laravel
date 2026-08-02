@@ -124,7 +124,7 @@
                 👋 Bonjour Admin
             </span>
 
-            {{-- زر مؤقت حتى نرجعو Login --}}
+            
             <button class="btn btn-outline-danger btn-sm" disabled>
                 Logout
             </button>
