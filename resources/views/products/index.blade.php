@@ -134,14 +134,14 @@
 
                         <form action="{{ route('products.destroy',$product) }}"
                               method="POST"
-                              class="d-inline">
+                              class="d-inline delete-form">
 
                             @csrf
                             @method('DELETE')
 
                             <button
-                                onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')"
-                                class="btn btn-danger btn-sm rounded-circle">
+                                type="button"
+                                class="btn btn-danger btn-sm rounded-circle delete-btn">
 
                                 <i class="bi bi-trash"></i>
 
@@ -182,5 +182,49 @@
 <div class="d-flex justify-content-center mt-4">
     {{ $products->links() }}
 </div>
+
+<script>
+
+document.querySelectorAll('.delete-btn').forEach(button => {
+
+    button.addEventListener('click', function () {
+
+        const form = this.closest('.delete-form');
+
+        Swal.fire({
+
+            title: 'Supprimer ce produit ?',
+
+            text: 'Cette action est irréversible !',
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#dc3545',
+
+            cancelButtonColor: '#6c757d',
+
+            confirmButtonText: '🗑 Oui, supprimer',
+
+            cancelButtonText: 'Annuler',
+
+            reverseButtons: true
+
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                form.submit();
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 
 @endsection

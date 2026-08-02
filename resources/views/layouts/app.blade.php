@@ -6,7 +6,6 @@
     <title>Task Manager</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,10 +35,9 @@
             padding:25px;
         }
 
-        .logo{
-            font-size:26px;
-            font-weight:700;
+        .sidebar h3{
             margin-bottom:40px;
+            font-weight:700;
         }
 
         .sidebar a{
@@ -66,11 +64,14 @@
         }
 
         .topbar{
-            background:white;
-            border-radius:18px;
-            padding:20px 30px;
-            box-shadow:0 10px 25px rgba(0,0,0,.08);
-            margin-bottom:30px;
+            background:#fff;
+            padding:18px 25px;
+            border-radius:15px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+            margin-bottom:25px;
         }
 
         .card{
@@ -86,16 +87,6 @@
         .table{
             margin:0;
         }
-        .topbar{
-    background:#fff;
-    padding:18px 25px;
-    border-radius:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    margin-bottom:25px;
-}
 
     </style>
 
@@ -119,57 +110,48 @@
 
 </div>
 
-<div class="topbar">
-    <div>
-        <h4 class="m-0 fw-bold">Dashboard</h4>
-    </div>
-
-    <div class="d-flex align-items-center gap-3">
-        <span class="text-secondary">👋 Bonjour Admin</span>
-
-        <a href="#" class="btn btn-outline-danger btn-sm">
-            Logout
-        </a>
-    </div>
-</div>
-
 <div class="content">
 
-    <div class="topbar d-flex justify-content-between align-items-center">
+    <div class="topbar">
 
-        <h2>Admin Dashboard</h2>
+        <h2 class="fw-bold mb-0">
+            Admin Dashboard
+        </h2>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center gap-3">
 
-    <div class="text-end">
+            <span class="text-secondary">
+                👋 Bonjour Admin
+            </span>
 
-        <strong>Admin</strong>
-
-        <br>
-
-        <small class="text-muted">
-             Task Manager
-        </small>
-
-    </div>
-
-</div>
-
-    </div>
-
-    @if(session('success'))
-
-        <div class="alert alert-success">
-
-            {{ session('success') }}
+            {{-- زر مؤقت حتى نرجعو Login --}}
+            <button class="btn btn-outline-danger btn-sm" disabled>
+                Logout
+            </button>
 
         </div>
 
-    @endif
+    </div>
 
     @yield('content')
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if(session('success'))
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Succès',
+    text: '{{ session("success") }}',
+    timer: 2000,
+    showConfirmButton: false
+});
+</script>
+@endif
 
 </body>
 </html>
