@@ -60,6 +60,7 @@
                 <tr>
 
                     <th>ID</th>
+                    <th>Image</th>
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Prix</th>
@@ -79,14 +80,24 @@
                     <td>{{ $product->id }}</td>
 
                     <td>
+                        @if($product->image)
+                            <img src="{{ asset('storage/'.$product->image) }}"
+                                 width="60"
+                                 height="60"
+                                 class="rounded shadow-sm"
+                                 style="object-fit:cover;">
+                        @else
+                            <span class="text-muted">Aucune image</span>
+                        @endif
+                    </td>
+
+                    <td>
                         <strong>{{ $product->name }}</strong>
                     </td>
 
                     <td>{{ $product->description }}</td>
 
-                    <td>
-                        {{ number_format($product->price,2) }} DH
-                    </td>
+                    <td>{{ number_format($product->price,2) }} DH</td>
 
                     <td>
 
@@ -146,7 +157,7 @@
 
                 <tr>
 
-                    <td colspan="6" class="text-center py-5 text-muted">
+                    <td colspan="7" class="text-center py-5 text-muted">
 
                         <i class="bi bi-box-seam fs-1"></i>
 
@@ -167,7 +178,9 @@
     </div>
 
 </div>
+
 <div class="d-flex justify-content-center mt-4">
     {{ $products->links() }}
 </div>
+
 @endsection
