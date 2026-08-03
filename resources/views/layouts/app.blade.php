@@ -89,6 +89,43 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/
             margin:0;
         }
 
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1050;
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 1040;
+            }
+            .sidebar-overlay.show {
+                display: block;
+            }
+        }
     </style>
 
 </head>
@@ -111,13 +148,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/
 
 </div>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 <div class="content">
 
     <div class="topbar">
 
-        <h2 class="fw-bold mb-0">
-            Admin Dashboard
-        </h2>
+        <div class="d-flex align-items-center gap-3">
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            <h2 class="fw-bold mb-0 fs-4">
+                Admin Dashboard
+            </h2>
+        </div>
 
         <div class="d-flex align-items-center gap-3">
 
@@ -141,6 +185,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.getElementById('mobileToggle');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+        });
+
+        overlay.addEventListener('click', function () {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    });
+</script>
 
 @if(session('success'))
 <script>

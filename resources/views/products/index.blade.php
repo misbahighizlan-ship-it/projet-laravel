@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
 
-    <h2 class="fw-bold">Gestion des Produits</h2>
+    <h2 class="fw-bold mb-0">Gestion des Produits</h2>
 
-    <a href="{{ route('products.create') }}" class="btn btn-primary rounded-pill px-4">
+    <a href="{{ route('products.create') }}" class="btn btn-primary rounded-pill px-4 text-center">
         <i class="bi bi-plus-circle"></i>
         Ajouter Produit
     </a>
@@ -53,9 +53,10 @@
 
     <div class="card-body">
 
-        <table class="table table-hover align-middle">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap">
 
-            <thead class="table-dark">
+                <thead class="table-dark">
 
                 <tr>
 
@@ -173,7 +174,8 @@
 
             </tbody>
 
-        </table>
+            </table>
+        </div>
 
     </div>
 

@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
 
     <div>
-        <h2 class="fw-bold">Ajouter un Produit</h2>
+        <h2 class="fw-bold mb-1">Ajouter un Produit</h2>
         <p class="text-muted mb-0">Ajoutez un nouveau produit à votre stock.</p>
     </div>
 
-    <a href="{{ route('products.index') }}" class="btn btn-outline-secondary">
+    <a href="{{ route('products.index') }}" class="btn btn-outline-secondary text-center">
         <i class="bi bi-arrow-left"></i> Retour
     </a>
 
@@ -99,16 +99,16 @@
     </small>
 
 </div>
-            <div class="d-flex gap-2">
+            <div class="d-flex flex-column-reverse flex-md-row gap-2 mt-4">
 
-                <button class="btn btn-primary">
+                <a href="{{ route('products.index') }}" class="btn btn-light border text-center">
+                    Annuler
+                </a>
+
+                <button class="btn btn-primary text-center">
                     <i class="bi bi-check-circle"></i>
                     Enregistrer
                 </button>
-
-                <a href="{{ route('products.index') }}" class="btn btn-light border">
-                    Annuler
-                </a>
 
             </div>
 

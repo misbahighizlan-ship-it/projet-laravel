@@ -120,17 +120,17 @@
 
                     </div>
 
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-column-reverse flex-md-row justify-content-between gap-3 mt-4">
 
                         <a href="{{ route('products.index') }}"
-                           class="btn btn-outline-secondary rounded-pill px-4">
+                           class="btn btn-outline-secondary rounded-pill px-4 text-center">
                             <i class="bi bi-arrow-left"></i>
                             Retour
                         </a>
 
                         <button
                             type="submit"
-                            class="btn btn-warning rounded-pill px-5">
+                            class="btn btn-warning rounded-pill px-5 text-center">
 
                             <i class="bi bi-check-circle"></i>
                             Modifier
